@@ -1,0 +1,63 @@
+CODE FOR HORSERACING GAME
+
+import turtle
+import random
+
+horses = []
+
+def create_horses():
+    color = ['red', 'brown', 'black']
+    begin = -300
+    ypos = [-150,0,150]
+    for i in range(3):
+        horse = turtle.Turtle()
+        horse.shape('circle')
+        horse.color(color[i])
+        horse.penup()
+        horse.setpos(begin,ypos[i])
+        horse.pendown()
+        horses.append(horse)
+
+def horserace(pick):
+    create_horses()
+    turtle.xcor = 100
+    screen = turtle.Screen()
+    screen.setup(width=700, height=500)
+
+    while True:
+        finish = 200
+        for racer in horses:
+            distance = random.randrange(1,20)
+            racer.forward(distance)
+            if racer.xcor() > finish:
+                return racer.fillcolor()
+                
+                
+CODE FOR MAINFILE
+
+from distutils import command
+from Würfelspiel import dice_game_start
+from Pferderennen import horserace
+
+from cgitb import text
+import tkinter as tk
+import turtle
+
+gui = tk.Tk(className="Spielehalle")
+rules=tk.Button(text="Regeln")
+rules.pack()
+
+pr_button = tk.Button(text="Pferderennen Simulator",activebackground="green",width=25,height=10, command= horserace.pack()
+
+if pr_button:
+    pick = input("What horse do you think is going to win?")
+    horserace(pick)
+    winner = horserace(pick)
+    if winner == pick:
+        print("Congrats, your pick was right")
+    else:
+        print("Sorry your pick didn't win")
+
+rtd_button = tk.Button(text="Roll the Dice",activebackground="green",width=25,height=10, command= dice_game_start).pack()
+
+gui.mainloop()
